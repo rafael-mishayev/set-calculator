@@ -1,0 +1,17 @@
+{
+  "name": "set-calculator",
+  "version": "1.0.0",
+  "description": "Interactive web calculator for set theory operations: union, intersection, difference, symmetric difference and cartesian product.",
+  "main": "index.html",
+  "scripts": {
+    "test": "node tests/setOperations.test.js"
+  },
+  "keywords": [
+    "set-theory",
+    "math",
+    "javascript",
+    "calculator"
+  ],
+  "author": "Rafael Mishayev",
+  "license": "MIT"
+}
