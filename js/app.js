@@ -129,24 +129,7 @@
   }
 
   function updateVenn(opKey) {
-    const circleA = els.venn.querySelector("#circleA");
-    const circleB = els.venn.querySelector("#circleB");
-    if (!circleA || !circleB) return;
-
-    const highlightsA = ["union", "differenceAB", "symmetricDifference"];
-    const highlightsB = ["union", "differenceBA", "symmetricDifference"];
-
-    circleA.style.opacity = opKey === "intersection" ? "0.25" : highlightsA.includes(opKey) || !opKey ? "0.55" : "0.55";
-    circleB.style.opacity = opKey === "intersection" ? "0.25" : highlightsB.includes(opKey) || !opKey ? "0.55" : "0.55";
-  }
-
-  function initVenn() {
-    els.venn.innerHTML = `
-      <circle id="circleA" cx="140" cy="150" r="100" fill="var(--color-a)" opacity="0.55" />
-      <circle id="circleB" cx="260" cy="150" r="100" fill="var(--color-b)" opacity="0.55" style="mix-blend-mode: multiply" />
-      <text x="90" y="80" font-size="18" fill="var(--color-text)">A</text>
-      <text x="300" y="80" font-size="18" fill="var(--color-text)">B</text>
-    `;
+    window.Venn.highlight(els.venn, opKey);
   }
 
   function copyResultToClipboard() {
@@ -171,7 +154,7 @@
 
   els.copyResult.addEventListener("click", copyResultToClipboard);
 
-  initVenn();
+  window.Venn.render(els.venn);
   renderChips(els.setAChips, []);
   renderChips(els.setBChips, []);
 })();
