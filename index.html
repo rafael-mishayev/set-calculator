@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מחשבון קבוצות | Set Calculator</title>
+  <meta name="description" content="מחשבון אינטראקטיבי לפעולות על קבוצות: איחוד, חיתוך, הפרש, הפרש סימטרי ומכפלה קרטזית." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="app-header__title">
+        <span class="app-header__icon" aria-hidden="true">{ }</span>
+        <div>
+          <h1>מחשבון קבוצות</h1>
+          <p class="app-header__subtitle">איחוד · חיתוך · הפרש · הפרש סימטרי · מכפלה קרטזית</p>
+        </div>
+      </div>
+      <button id="themeToggle" class="icon-button" type="button" aria-label="החלף מצב תצוגה">🌙</button>
+    </header>
+
+    <main class="layout">
+      <section class="panel inputs-panel" aria-label="קלט הקבוצות">
+        <div class="set-card set-card--a">
+          <div class="set-card__header">
+            <label for="setA">קבוצה A</label>
+            <button type="button" class="link-button" data-example="a">דוגמה</button>
+          </div>
+          <textarea id="setA" rows="2" placeholder="לדוגמה: 1, 2, 3, 4"></textarea>
+          <div class="chips" id="setAChips" aria-live="polite"></div>
+        </div>
+
+        <div class="set-card set-card--b">
+          <div class="set-card__header">
+            <label for="setB">קבוצה B</label>
+            <button type="button" class="link-button" data-example="b">דוגמה</button>
+          </div>
+          <textarea id="setB" rows="2" placeholder="לדוגמה: 3, 4, 5, 6"></textarea>
+          <div class="chips" id="setBChips" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="panel operations-panel" aria-label="פעולות על קבוצות">
+        <button type="button" class="op-button" data-op="union">
+          <span class="op-button__symbol">A ∪ B</span>
+          <span class="op-button__label">איחוד</span>
+        </button>
+        <button type="button" class="op-button" data-op="intersection">
+          <span class="op-button__symbol">A ∩ B</span>
+          <span class="op-button__label">חיתוך</span>
+        </button>
+        <button type="button" class="op-button" data-op="differenceAB">
+          <span class="op-button__symbol">A \ B</span>
+          <span class="op-button__label">הפרש</span>
+        </button>
+        <button type="button" class="op-button" data-op="differenceBA">
+          <span class="op-button__symbol">B \ A</span>
+          <span class="op-button__label">הפרש</span>
+        </button>
+        <button type="button" class="op-button" data-op="symmetricDifference">
+          <span class="op-button__symbol">A △ B</span>
+          <span class="op-button__label">הפרש סימטרי</span>
+        </button>
+        <button type="button" class="op-button" data-op="cartesianProduct">
+          <span class="op-button__symbol">A × B</span>
+          <span class="op-button__label">מכפלה קרטזית</span>
+        </button>
+      </section>
+
+      <section class="panel visual-panel" aria-label="תרשים ון">
+        <svg id="vennDiagram" viewBox="0 0 400 300" role="img" aria-label="תרשים ון של הקבוצות"></svg>
+      </section>
+
+      <section class="panel result-panel" aria-label="תוצאה">
+        <h2 id="resultTitle">התוצאה תוצג כאן</h2>
+        <div class="chips chips--result" id="resultChips" aria-live="polite"></div>
+        <table class="cartesian-table hidden" id="cartesianTable">
+          <tbody id="cartesianTableBody"></tbody>
+        </table>
+        <button type="button" id="copyResult" class="link-button hidden">העתק תוצאה</button>
+      </section>
+
+      <section class="panel history-panel" aria-label="היסטוריית חישובים">
+        <h2>היסטוריה</h2>
+        <ul id="historyList" class="history-list"></ul>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>נבנה עם JavaScript טהור, ללא תלות בספריות חיצוניות.</p>
+    </footer>
+  </div>
+
+  <script src="js/setOperations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
