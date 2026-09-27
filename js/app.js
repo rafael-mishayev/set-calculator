@@ -89,8 +89,12 @@
     return "{ " + values.join(", ") + " }";
   }
 
+  const MAX_DISPLAY_PAIRS = 200;
+
   function formatPairs(pairs) {
-    return "{ " + pairs.map(([x, y]) => `(${x}, ${y})`).join(", ") + " }";
+    const shown = pairs.slice(0, MAX_DISPLAY_PAIRS).map(([x, y]) => `(${x}, ${y})`);
+    const suffix = pairs.length > MAX_DISPLAY_PAIRS ? `, … ועוד ${pairs.length - MAX_DISPLAY_PAIRS}` : "";
+    return "{ " + shown.join(", ") + suffix + " }";
   }
 
   function runOperation(opKey) {
@@ -121,13 +125,22 @@
 
   function renderCartesianTable(pairs) {
     els.cartesianTableBody.innerHTML = "";
-    pairs.forEach(([x, y]) => {
+    pairs.slice(0, MAX_DISPLAY_PAIRS).forEach(([x, y]) => {
       const row = document.createElement("tr");
       const cell = document.createElement("td");
       cell.textContent = `(${x}, ${y})`;
       row.appendChild(cell);
       els.cartesianTableBody.appendChild(row);
     });
+
+    if (pairs.length > MAX_DISPLAY_PAIRS) {
+      const row = document.createElement("tr");
+      const cell = document.createElement("td");
+      cell.textContent = `… ועוד ${pairs.length - MAX_DISPLAY_PAIRS} זוגות (סה״כ ${pairs.length})`;
+      cell.className = "cartesian-table__truncated";
+      row.appendChild(cell);
+      els.cartesianTableBody.appendChild(row);
+    }
   }
 
   function pushHistory(op, result) {
@@ -154,7 +167,21 @@
 
   function copyResultToClipboard() {
     const text = els.resultTitle.textContent;
-    navigator.clipboard.writeText(text);
+    const originalLabel = els.copyResult.textContent;
+
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        els.copyResult.textContent = "הועתק!";
+      })
+      .catch(() => {
+        els.copyResult.textContent = "העתקה נכשלה";
+      })
+      .finally(() => {
+        setTimeout(() => {
+          els.copyResult.textContent = originalLabel;
+        }, 1500);
+      });
   }
 
   els.setA.addEventListener("input", () => renderChips(els.setAChips, getSetA()));

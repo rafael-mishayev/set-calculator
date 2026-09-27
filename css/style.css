@@ -311,6 +311,12 @@ textarea:focus {
   padding: 4px 8px;
 }
 
+.cartesian-table__truncated {
+  color: var(--color-text-muted);
+  font-style: italic;
+  text-align: center;
+}
+
 .hidden {
   display: none;
 }
