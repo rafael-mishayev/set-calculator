@@ -15,7 +15,27 @@
     copyResult: document.getElementById("copyResult"),
     historyList: document.getElementById("historyList"),
     venn: document.getElementById("vennDiagram"),
+    themeToggle: document.getElementById("themeToggle"),
   };
+
+  const THEME_KEY = "set-calculator-theme";
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    els.themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+  }
+
+  function initTheme() {
+    const preferredDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const stored = localStorage.getItem(THEME_KEY);
+    applyTheme(stored || (preferredDark ? "dark" : "light"));
+  }
+
+  function toggleTheme() {
+    const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  }
 
   const OPERATIONS = {
     union: { label: "איחוד", symbol: "A ∪ B", run: (a, b) => union(a, b) },
@@ -153,7 +173,9 @@
   });
 
   els.copyResult.addEventListener("click", copyResultToClipboard);
+  els.themeToggle.addEventListener("click", toggleTheme);
 
+  initTheme();
   window.Venn.render(els.venn);
   renderChips(els.setAChips, []);
   renderChips(els.setBChips, []);
