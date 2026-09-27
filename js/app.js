@@ -38,17 +38,17 @@
   }
 
   const OPERATIONS = {
-    union: { label: "איחוד", symbol: "A ∪ B", run: (a, b) => union(a, b) },
-    intersection: { label: "חיתוך", symbol: "A ∩ B", run: (a, b) => intersection(a, b) },
-    differenceAB: { label: "הפרש", symbol: "A \\ B", run: (a, b) => difference(a, b) },
-    differenceBA: { label: "הפרש", symbol: "B \\ A", run: (a, b) => difference(b, a) },
+    union: { label: "Union", symbol: "A ∪ B", run: (a, b) => union(a, b) },
+    intersection: { label: "Intersection", symbol: "A ∩ B", run: (a, b) => intersection(a, b) },
+    differenceAB: { label: "Difference", symbol: "A \\ B", run: (a, b) => difference(a, b) },
+    differenceBA: { label: "Difference", symbol: "B \\ A", run: (a, b) => difference(b, a) },
     symmetricDifference: {
-      label: "הפרש סימטרי",
+      label: "Symmetric Difference",
       symbol: "A △ B",
       run: (a, b) => symmetricDifference(a, b),
     },
     cartesianProduct: {
-      label: "מכפלה קרטזית",
+      label: "Cartesian Product",
       symbol: "A × B",
       run: (a, b) => cartesianProduct(a, b),
       isPairs: true,
@@ -74,7 +74,7 @@
   function renderChips(container, values) {
     container.innerHTML = "";
     if (values.length === 0) {
-      container.innerHTML = '<span class="chip chip--muted">קבוצה ריקה</span>';
+      container.innerHTML = '<span class="chip chip--muted">Empty set</span>';
       return;
     }
     values.forEach((value) => {
@@ -93,7 +93,7 @@
 
   function formatPairs(pairs) {
     const shown = pairs.slice(0, MAX_DISPLAY_PAIRS).map(([x, y]) => `(${x}, ${y})`);
-    const suffix = pairs.length > MAX_DISPLAY_PAIRS ? `, … ועוד ${pairs.length - MAX_DISPLAY_PAIRS}` : "";
+    const suffix = pairs.length > MAX_DISPLAY_PAIRS ? `, … and ${pairs.length - MAX_DISPLAY_PAIRS} more` : "";
     return "{ " + shown.join(", ") + suffix + " }";
   }
 
@@ -136,7 +136,7 @@
     if (pairs.length > MAX_DISPLAY_PAIRS) {
       const row = document.createElement("tr");
       const cell = document.createElement("td");
-      cell.textContent = `… ועוד ${pairs.length - MAX_DISPLAY_PAIRS} זוגות (סה״כ ${pairs.length})`;
+      cell.textContent = `… and ${pairs.length - MAX_DISPLAY_PAIRS} more pairs (${pairs.length} total)`;
       cell.className = "cartesian-table__truncated";
       row.appendChild(cell);
       els.cartesianTableBody.appendChild(row);
@@ -172,10 +172,10 @@
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        els.copyResult.textContent = "הועתק!";
+        els.copyResult.textContent = "Copied!";
       })
       .catch(() => {
-        els.copyResult.textContent = "העתקה נכשלה";
+        els.copyResult.textContent = "Copy failed";
       })
       .finally(() => {
         setTimeout(() => {

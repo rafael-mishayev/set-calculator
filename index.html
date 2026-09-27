@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>מחשבון קבוצות | Set Calculator</title>
-  <meta name="description" content="מחשבון אינטראקטיבי לפעולות על קבוצות: איחוד, חיתוך, הפרש, הפרש סימטרי ומכפלה קרטזית." />
+  <title>Set Calculator</title>
+  <meta name="description" content="An interactive calculator for set operations: union, intersection, difference, symmetric difference and cartesian product." />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -13,82 +13,82 @@
       <div class="app-header__title">
         <span class="app-header__icon" aria-hidden="true">{ }</span>
         <div>
-          <h1>מחשבון קבוצות</h1>
-          <p class="app-header__subtitle">איחוד · חיתוך · הפרש · הפרש סימטרי · מכפלה קרטזית</p>
+          <h1>Set Calculator</h1>
+          <p class="app-header__subtitle">Union · Intersection · Difference · Symmetric Difference · Cartesian Product</p>
         </div>
       </div>
-      <button id="themeToggle" class="icon-button" type="button" aria-label="החלף מצב תצוגה">🌙</button>
+      <button id="themeToggle" class="icon-button" type="button" aria-label="Toggle theme">🌙</button>
     </header>
 
     <main class="layout">
-      <section class="panel inputs-panel" aria-label="קלט הקבוצות">
+      <section class="panel inputs-panel" aria-label="Set input">
         <div class="set-card set-card--a">
           <div class="set-card__header">
-            <label for="setA">קבוצה A</label>
-            <button type="button" class="link-button" data-example="a">דוגמה</button>
+            <label for="setA">Set A</label>
+            <button type="button" class="link-button" data-example="a">Example</button>
           </div>
-          <textarea id="setA" rows="2" placeholder="לדוגמה: 1, 2, 3, 4"></textarea>
+          <textarea id="setA" rows="2" placeholder="e.g. 1, 2, 3, 4"></textarea>
           <div class="chips" id="setAChips" aria-live="polite"></div>
         </div>
 
         <div class="set-card set-card--b">
           <div class="set-card__header">
-            <label for="setB">קבוצה B</label>
-            <button type="button" class="link-button" data-example="b">דוגמה</button>
+            <label for="setB">Set B</label>
+            <button type="button" class="link-button" data-example="b">Example</button>
           </div>
-          <textarea id="setB" rows="2" placeholder="לדוגמה: 3, 4, 5, 6"></textarea>
+          <textarea id="setB" rows="2" placeholder="e.g. 3, 4, 5, 6"></textarea>
           <div class="chips" id="setBChips" aria-live="polite"></div>
         </div>
       </section>
 
-      <section class="panel operations-panel" aria-label="פעולות על קבוצות">
+      <section class="panel operations-panel" aria-label="Set operations">
         <button type="button" class="op-button" data-op="union">
           <span class="op-button__symbol">A ∪ B</span>
-          <span class="op-button__label">איחוד</span>
+          <span class="op-button__label">Union</span>
         </button>
         <button type="button" class="op-button" data-op="intersection">
           <span class="op-button__symbol">A ∩ B</span>
-          <span class="op-button__label">חיתוך</span>
+          <span class="op-button__label">Intersection</span>
         </button>
         <button type="button" class="op-button" data-op="differenceAB">
           <span class="op-button__symbol">A \ B</span>
-          <span class="op-button__label">הפרש</span>
+          <span class="op-button__label">Difference</span>
         </button>
         <button type="button" class="op-button" data-op="differenceBA">
           <span class="op-button__symbol">B \ A</span>
-          <span class="op-button__label">הפרש</span>
+          <span class="op-button__label">Difference</span>
         </button>
         <button type="button" class="op-button" data-op="symmetricDifference">
           <span class="op-button__symbol">A △ B</span>
-          <span class="op-button__label">הפרש סימטרי</span>
+          <span class="op-button__label">Symmetric Difference</span>
         </button>
         <button type="button" class="op-button" data-op="cartesianProduct">
           <span class="op-button__symbol">A × B</span>
-          <span class="op-button__label">מכפלה קרטזית</span>
+          <span class="op-button__label">Cartesian Product</span>
         </button>
       </section>
 
-      <section class="panel visual-panel" aria-label="תרשים ון">
-        <svg id="vennDiagram" viewBox="0 0 400 300" role="img" aria-label="תרשים ון של הקבוצות"></svg>
+      <section class="panel visual-panel" aria-label="Venn diagram">
+        <svg id="vennDiagram" viewBox="0 0 400 300" role="img" aria-label="Venn diagram of the sets"></svg>
       </section>
 
-      <section class="panel result-panel" aria-label="תוצאה">
-        <h2 id="resultTitle">התוצאה תוצג כאן</h2>
+      <section class="panel result-panel" aria-label="Result">
+        <h2 id="resultTitle">The result will appear here</h2>
         <div class="chips chips--result" id="resultChips" aria-live="polite"></div>
         <table class="cartesian-table hidden" id="cartesianTable">
           <tbody id="cartesianTableBody"></tbody>
         </table>
-        <button type="button" id="copyResult" class="link-button hidden">העתק תוצאה</button>
+        <button type="button" id="copyResult" class="link-button hidden">Copy result</button>
       </section>
 
-      <section class="panel history-panel" aria-label="היסטוריית חישובים">
-        <h2>היסטוריה</h2>
+      <section class="panel history-panel" aria-label="Calculation history">
+        <h2>History</h2>
         <ul id="historyList" class="history-list"></ul>
       </section>
     </main>
 
     <footer class="app-footer">
-      <p>נבנה עם JavaScript טהור, ללא תלות בספריות חיצוניות.</p>
+      <p>Built with vanilla JavaScript, no external libraries.</p>
     </footer>
   </div>
 

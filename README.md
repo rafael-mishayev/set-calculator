@@ -1,6 +1,4 @@
-# מחשבון קבוצות | Set Calculator
-
-מחשבון אינטראקטיבי לתורת הקבוצות, הבנוי כולו ב-HTML, CSS ו-JavaScript טהור (ללא תלות בספריות או ב-build step).
+# Set Calculator
 
 An interactive set-theory calculator: union, intersection, difference, symmetric
 difference and cartesian product, with a live Venn diagram and a running history
@@ -24,8 +22,6 @@ of every calculation. Vanilla HTML/CSS/JS, no dependencies, no build step.
 - **Dark mode** — follows the OS color-scheme by default and remembers your
   choice in `localStorage`.
 - **Responsive layout** — collapses to a single column on narrow screens.
-- **RTL-first UI** — built for Hebrew, with set notation kept left-to-right
-  where it reads more naturally.
 
 ## Running locally
 
