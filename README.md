@@ -4,6 +4,8 @@ An interactive set-theory calculator: union, intersection, difference, symmetric
 difference and cartesian product, with a live Venn diagram and a running history
 of every calculation. Vanilla HTML/CSS/JS, no dependencies, no build step.
 
+**Live demo:** https://rafael-mishayev.github.io/set-calculator/
+
 ## Features
 
 - **Five set operations** — union (A ∪ B), intersection (A ∩ B), difference in
