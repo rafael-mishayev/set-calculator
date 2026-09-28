@@ -1,5 +1,7 @@
 # Set Calculator
 
+[![Tests](https://github.com/rafael-mishayev/set-calculator/actions/workflows/test.yml/badge.svg)](https://github.com/rafael-mishayev/set-calculator/actions/workflows/test.yml)
+
 An interactive set-theory calculator: union, intersection, difference, symmetric
 difference and cartesian product, with a live Venn diagram and a running history
 of every calculation. Vanilla HTML/CSS/JS, no dependencies, no build step.
